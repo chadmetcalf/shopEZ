@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<div class="image" float:right>
+                <%= link_to (image_tag @item.image_url), @item %>
+            </div>
+
+
+<p>
+  <b>Code:</b>
+  <%= @item.code %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @item.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @item.price %>
+</p>
+
+
+
+
+<%= link_to 'Add to Cart', :controller => :Cart, :action => :add, :id => @item.id %> |
+<%= link_to 'Back', items_path %>
