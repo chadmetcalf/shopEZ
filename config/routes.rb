@@ -1,4 +1,5 @@
 Shopez::Application.routes.draw do
+  root :to => "items#index"
   get "user/admin_login"
 
   get "user/logout"

@@ -1,5 +1,8 @@
 <h1>Catalog</h1>
 
+
+
+
 <table class="catalog">
 <% for item in @items %>
   <tr>
@@ -34,3 +37,4 @@
 <% if session[:login] == 1 %>
     <p><%= link_to 'New item', new_item_path %></p>
 <% end %>
+<a href="zxing://scan/?ret=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3D{CODE}"> Scan for a product on Google </a>
