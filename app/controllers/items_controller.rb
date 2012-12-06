@@ -12,12 +12,21 @@ class ItemsController < ApplicationController
   end
 
   #get /byID/?upc=123213
-  def byUPC
-    upc = params[:upc]
-    # item = Item.where('code = ?','upc').first
-    
-    item = Item.find_or_create_by_code(upc)
-    redirect_to items_path
+  # def byUPC
+  #   upc = params[:upc]
+  #   # item = Item.where('code = ?','upc').first
+  #   
+  #   item = Item.find_or_create_by_code(upc)
+  #   redirect_to items_path
+  # end
+  
+  # GET /items/1/upc
+  def upc
+    upc_code = params[:upc]
+    redirect_to root_url, alert: 'Not a valid EAN' and return unless upc_code
+    @item = Item.find_or_create_by_code(upc_code)
+    @item.update_item_info
+    redirect_to root_path and return
   end
   
   # GET /items/1

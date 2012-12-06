@@ -13,20 +13,28 @@ class Item < ActiveRecord::Base
     @json_feed ||= ActiveSupport::JSON.decode(open(uri))
   end
   
-  def product_name
+  def google_name
     google_api["items"].first["product"]["title"]
   end
   
-  def product_description
+  def google_description
     google_api["items"].first["product"]["description"]
   end
   
-  def product_price
+  def google_price
     google_api["items"].first["product"]["inventories"].first["price"]
   end
   
-  def product_image_url
+  def google_image_url
     google_api["items"].first["product"]["images"].first["link"]
+  end
+  
+  def update_item_info
+    self.title = google_name
+    self.description = google_description
+    self.price = google_price
+    self.image_url = google_image_url
+    self.save
   end
   
 end
