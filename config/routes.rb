@@ -1,5 +1,8 @@
 Shopez::Application.routes.draw do
   root :to => "items#index"
+  
+  match 'items/:upc/upc' => 'items#upc', :as => :items_upc
+  
   get "user/admin_login"
 
   get "user/logout"
