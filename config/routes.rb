@@ -6,10 +6,6 @@ Shopez::Application.routes.draw do
 
   get "cart/index"
 
-  get "suer/admin_login"
-
-  get "suer/logout"
-
   get "site/about"
 
   get "site/contact"
