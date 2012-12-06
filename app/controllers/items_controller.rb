@@ -10,14 +10,16 @@ class ItemsController < ApplicationController
       format.json { render json: @items }
     end
   end
+
+  #get /byID/?upc=123213
+  def byUPC
+    upc = params[:upc]
+    # item = Item.where('code = ?','upc').first
+    
+    item = Item.find_or_create_by_code(upc)
+    redirect_to items_path
+  end
   
- #get /byID/?upc=123213
- def byUPC
-   upc = params[:upc]
-   item = Item.where('code = ?','upc').first
-   id = item.id
-   redirect_to :controller => :items, :action => :index
-end
   # GET /items/1
   # GET /items/1.json
   def show
