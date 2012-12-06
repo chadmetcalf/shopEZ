@@ -25,4 +25,8 @@ class Item < ActiveRecord::Base
     google_api["items"].first["product"]["inventories"].first["price"]
   end
   
+  def product_image_url
+    google_api["items"].first["product"]["images"].first["link"]
+  end
+  
 end
