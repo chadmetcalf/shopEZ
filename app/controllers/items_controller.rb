@@ -23,10 +23,9 @@ class ItemsController < ApplicationController
   # GET /items/1/upc
   def upc
     upc_code = params[:upc]
-    redirect_to root_url, alert: 'Not a valid EAN' and return unless upc_code
-    @item = Item.find_or_create_by_code(upc_code)
-    @item.update_item_info
-    redirect_to root_path and return
+    redirect_to root_url, alert: 'Not a valid UPC' and return unless upc_code
+    @item = Item.code_find_or_create_by(upc_code)
+    redirect_to add_item_to_cart_path(@item.id) and return
   end
   
   # GET /items/1

@@ -3,6 +3,12 @@ require 'open-uri'
 class Item < ActiveRecord::Base
   attr_accessible :code, :title, :description, :price, :image_url
   
+  def self.code_find_or_create_by(upc_code)
+    item = self.find_or_create_by_code(upc_code)
+    item.update_item_info if item.title.nil?
+    return item
+  end
+  
   def uri
     "https://www.googleapis.com/shopping/search/v1/public/products?key=#{google_api_key}&country=US&restrictBy=gtin:#{code}&alt=json"
   end

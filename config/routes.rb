@@ -8,6 +8,8 @@ Shopez::Application.routes.draw do
   get "user/logout"
 
   get "cart/index"
+  
+  match 'cart/add/:id' => 'cart#add', :as => :add_item_to_cart
 
   get "site/about"
 
