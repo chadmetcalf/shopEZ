@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.found
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
     upc_code = params[:upc]
     redirect_to root_url, alert: 'Not a valid UPC' and return unless upc_code
     @item = Item.code_find_or_create_by(upc_code)
+    redirect_to root_url, alert: 'No product matches found' and return if @item.title.blank?
     redirect_to add_item_to_cart_path(@item.id) and return
   end
   
