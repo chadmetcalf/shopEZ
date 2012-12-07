@@ -3,6 +3,11 @@ require 'open-uri'
 class Item < ActiveRecord::Base
   attr_accessible :code, :title, :description, :price, :image_url
   
+  def self.found
+    items = Arel::Table.new(:items)
+    where(items[:title].not_eq(false))
+  end
+  
   def self.code_find_or_create_by(upc_code)
     item = self.find_or_create_by_code(upc_code)
     item.update_item_info if item.title.nil?
