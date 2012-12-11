@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     upc_code = params[:upc]
     redirect_to root_url, alert: 'Not a valid UPC' and return unless upc_code
     @item = Item.code_find_or_create_by(upc_code)
-    redirect_to root_url, alert: 'No product matches found' and return if @item.title.blank?
+    redirect_to root_url, alert: 'No product matches found' and return unless @item.errors.empty?
     redirect_to add_item_to_cart_path(@item.id) and return
   end
   

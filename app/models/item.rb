@@ -2,6 +2,7 @@ require 'open-uri'
 
 class Item < ActiveRecord::Base
   attr_accessible :code, :title, :description, :price, :image_url
+  attr_accessor :errors
   
   def self.found
     items = Arel::Table.new(:items)
@@ -43,6 +44,8 @@ class Item < ActiveRecord::Base
   end
   
   def update_item_info
+    errors << {no_item: "No Product Found"} if google_api["totalItems"] == 0
+    return unless errors.empty?
     self.title = google_name
     self.description = google_description
     self.price = google_price
@@ -50,4 +53,7 @@ class Item < ActiveRecord::Base
     self.save
   end
   
+  def errors
+    @errors ||= []
+  end
 end
